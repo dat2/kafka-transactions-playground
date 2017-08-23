@@ -1,0 +1,24 @@
+version: '3'
+services:
+  # the infrastructure services
+  postgres:
+    image: "postgres:alpine"
+  redis:
+    image: "redis:alpine"
+  kafka:
+    image: "spotify/kafka"
+  # my services
+  producer:
+    build: producer
+    links:
+      - "kafka"
+  cache:
+    build: cache
+    links:
+      - "redis"
+      - "kafka"
+  db:
+    build: db
+    links:
+      - "postgres"
+      - "kafka"

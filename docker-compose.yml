@@ -7,6 +7,11 @@ services:
     image: "redis:alpine"
   kafka:
     image: "spotify/kafka"
+    environment:
+      - TOPICS=transactions
+    ports:
+      - "2181:2181"
+      - "9092:9092"
   # my services
   producer:
     build: producer
